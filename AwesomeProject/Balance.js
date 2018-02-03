@@ -14,6 +14,7 @@ import {
 export default class Balance extends React.Component {
   static propTypes = {
     changeCurrentPage: PropTypes.func.isRequired,
+    selectFromAccountId: PropTypes.func.isRequired,
     username: PropTypes.string.isRequired,
     accounts: PropTypes.array.isRequired
   }
@@ -37,9 +38,13 @@ export default class Balance extends React.Component {
   };
 
   renderHeader = () => {
-    return <Text style={{fontSize: 24, color: '#5dd55d'}}>Pay From</Text>;
+    return <Text style={{fontSize: 24, color: '#5dd55d', textAlign: 'center'}}>Pay From</Text>;
   };
 
+  selectFromAccountId = (id) => {
+    this.props.selectFromAccountId(id);
+    this.props.changeCurrentPage('select');
+  }
 
   render() {
     return (
@@ -54,9 +59,10 @@ export default class Balance extends React.Component {
                     title={item['accountType']['accountType']}
                     subtitle={'Balance: '+ item['balance']}
                     containerStyle={{ borderBottomWidth: 0 }}
+                    onPress={()=>{this.selectFromAccountId(item['accountId'])}}
                   />
                 )}
-                keyExtractor={item => item['accountNumber']}
+                keyExtractor={item => item['accountId']}
                 ItemSeparatorComponent={this.renderSeparator}
                 ListHeaderComponent={this.renderHeader}
                 onEndReachedThreshold={50}

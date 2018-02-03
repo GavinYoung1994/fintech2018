@@ -18,7 +18,8 @@ export default class App extends React.Component {
       loggedIn: false,
       currentPage: '',
       username: '',
-      accounts: []
+      accounts: [],
+      fromAccountId: 0
     }
   }
 
@@ -38,6 +39,10 @@ export default class App extends React.Component {
     this.setState({username: username});
   }
 
+  selectFromAccountId = (id) => {
+    this.setState({fromAccountId: id});
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -54,13 +59,16 @@ export default class App extends React.Component {
           this.state.loggedIn && this.state.currentPage == 'balance' &&
           <Balance
             changeCurrentPage = {this.changeCurrentPage}
+            selectFromAccountId = {this.selectFromAccountId}
             username = {this.state.username}
             accounts = {this.state.accounts}
           />
         }
         {
           this.state.loggedIn && this.state.currentPage == 'select' &&
-          <Select/>
+          <Select
+            changeCurrentPage = {this.changeCurrentPage}
+          />
         }
       </View>
     );
