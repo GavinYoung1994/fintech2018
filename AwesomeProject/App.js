@@ -31,7 +31,7 @@ export default class App extends React.Component {
   }
 
   updateAccounts = (accounts) => {
-    this.setState({accounts: accounts});
+    this.setState({accounts: this.state.accounts.concat(accounts)});
   }
 
   updateUsername = (username) => {

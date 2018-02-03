@@ -20,10 +20,11 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: 'steveren',
+      password: 'steveren',
       isLoading: false,
-      apiKey: ''
+      apiKey: '',
+      totalPages: 0
     }
   }
 
@@ -58,11 +59,11 @@ export default class Login extends React.Component {
             'Content-Type': 'application/json',
             'X-Api-Key': this.state.apiKey
           }
-        }).then((response) => {
-          return response.json();
-        }).then((responseData) => {
-          this.props.updateUsername(responseData["person"]["forename"]);
-          fetch(`https://api-wufthacks.xlabs.one:8243/td/account/V1.0.0/account/all?page=1&size=5`, {
+        }).then((response1) => {
+          return response1.json();
+        }).then((responseData1) => {
+          this.props.updateUsername(responseData1["person"]["forename"]);
+          fetch(`https://api-wufthacks.xlabs.one:8243/td/account/V1.0.0/account/types?page=0&size=9`, {
             method: 'GET',
             headers: {
               'Accept': 'application/json',
@@ -70,10 +71,27 @@ export default class Login extends React.Component {
               'Content-Type': 'application/json',
               'X-Api-Key': this.state.apiKey
             }
-          }).then((response) => {
-            return response.json();
-          }).then((responseData) => {
-            this.props.updateAccounts(responseData);
+          }).then((response2) => {
+            return response2.json();
+          }).then((responseData2) => {
+            this.setState({totalPages: responseData2["totalPages"]});
+          }).then(()=>{
+            for (var i = 0; i < 1; i++) {
+              let accountFetchUrl = 'https://api-wufthacks.xlabs.one:8243/td/account/V1.0.0/account/all?page='+i+'&size=9';
+              fetch(accountFetchUrl, {
+                method: 'GET',
+                headers: {
+                  'Accept': 'application/json',
+                  'Authorization': 'Bearer 8b60815e-85d1-3a21-9154-6c384535a6f2',
+                  'Content-Type': 'application/json',
+                  'X-Api-Key': this.state.apiKey
+                }
+              }).then((response3) => {
+                return response3.json();
+              }).then((responseData3) => {
+                this.props.updateAccounts(responseData3);
+              })
+            }
             this.setState({isLoading: false});
             this.props.changeLoginStatus();
             this.props.changeCurrentPage('balance');
