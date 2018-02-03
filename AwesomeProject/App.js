@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Login from './Login';
 import Balance from './Balance'
 import Select from './Select';
+import NewContact from './NewContact';
 import {
   StyleSheet,
   Text,
@@ -67,6 +68,12 @@ export default class App extends React.Component {
         {
           this.state.loggedIn && this.state.currentPage == 'select' &&
           <Select
+            changeCurrentPage = {this.changeCurrentPage}
+          />
+        }
+        {
+          this.state.loggedIn && this.state.currentPage == 'newContact' &&
+          <NewContact
             changeCurrentPage = {this.changeCurrentPage}
           />
         }

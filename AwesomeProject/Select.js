@@ -7,11 +7,13 @@ import {
   View,
   Image,
   TextInput,
-  Button
+  Button,
+  FlatList
 } from 'react-native';
 
 export default class Select extends React.Component {
   static propTypes = {
+    changeCurrentPage: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -36,26 +38,79 @@ export default class Select extends React.Component {
     return <Text style={{fontSize: 24, color: '#5dd55d', textAlign: 'center'}}>Favorites</Text>;
   };
 
-  addPayTo = () => {
+  renderContactsHeader = () => {
+    return <Text style={{fontSize: 24, color: '#5dd55d', textAlign: 'center'}}>Contacts</Text>;
+  };
 
+  addPayTo = () => {
+    this.props.changeCurrentPage('newContact');
   }
 
   render() {
     return (
       <View style={styles.container}>
   	  	<View style={{flex: 0.8, flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Image
-            style={{width: 40, height: 40}} 
-            source={require('./user.png')} />
-          <Text style={{fontSize: 24, color: '#5dd55d'}}>Pay To</Text>
-          <Button
+          <View>
+            <Image
+              style={{width: 40, height: 40}} 
+              source={require('./user.png')} />
+            </View>
+          <View><Text style={{fontSize: 24, color: '#5dd55d'}}>Pay To</Text></View>
+          <View><Button
             onPress={this.addPayTo}
             color="#5dd55d"
             title='Add Contact'
-          />
+          /></View>
         </View>
         <View>
-
+          <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width:400 }}>
+              <FlatList
+                data={[
+                  {name:'Ben', note:'A genius'},
+                  {name:'Benjamin', note:'A genius with a longer name'}
+                  ]}
+                renderItem={({ item }) => (
+                  <ListItem
+                    roundAvatar
+                    title={item['name']}
+                    subtitle={item['note']}
+                    containerStyle={{ borderBottomWidth: 0 }}
+                    onPress={()=>{}}
+                  />
+                )}
+                keyExtractor={item => item['name']}
+                ItemSeparatorComponent={this.renderSeparator}
+                ListHeaderComponent={this.renderFavHeader}
+                onEndReachedThreshold={3}
+              />
+            </List>
+        </View>
+        <View>
+          <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width:400 }}>
+              <FlatList
+                data={[
+                  {name:'Alex', note:'Not sure a boy or a girl'},
+                  {name:'BOA', note:'Bank of America'},
+                  {name:'Landlord', note:'He got all my money'},
+                  {name:'PECO', note:'Money for power'},
+                  {name:'Starbucks', note:"Don't talk to me until I have my coffee"},
+                  {name:'Zoo', note:'I love animals'}
+                  ]}
+                renderItem={({ item }) => (
+                  <ListItem
+                    roundAvatar
+                    title={item['name']}
+                    subtitle={item['note']}
+                    containerStyle={{ borderBottomWidth: 0 }}
+                    onPress={()=>{}}
+                  />
+                )}
+                keyExtractor={item => item['name']}
+                ItemSeparatorComponent={this.renderSeparator}
+                ListHeaderComponent={this.renderContactsHeader}
+                onEndReachedThreshold={7}
+              />
+            </List>
         </View>
       </View>
     );
@@ -64,10 +119,6 @@ export default class Select extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: '#fff'
   }
 });
