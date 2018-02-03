@@ -14,7 +14,10 @@ export default class App extends React.Component {
     this.state = {
       username: '',
       password: '',
-      isLoading: false
+      isLoading: false,
+      apiKey: '',
+      userFullName: '',
+      accounts: []
     }
   }
 
@@ -26,7 +29,6 @@ export default class App extends React.Component {
           'Accept': 'application/json',
           'Authorization': 'Bearer 8b60815e-85d1-3a21-9154-6c384535a6f2',
           'Content-Type': 'application/json'
-
         },
         body: JSON.stringify({
            'username': this.state.username,
@@ -37,17 +39,38 @@ export default class App extends React.Component {
       if(response.status == 200){
         return response.json();
       }else{
-        alert(response);
+        alert("Login Failed");
         this.setState({isLoading: false});
       }
     }).then((responseData) => {
-      alert(responseData["X-Api-Key"]);
-      this.setState({isLoading: false});
+      this.setState({apiKey: responseData["X-Api-Key"]});
+      fetch(`https://api-wufthacks.xlabs.one:8243/td/userprofile/V1.0.0/profile`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer 8b60815e-85d1-3a21-9154-6c384535a6f2',
+            'Content-Type': 'application/json',
+            'X-Api-Key': this.state.apiKey
+          }
+        }).then((response) => {
+          return response.json();
+        }).then((responseData) => {
+          this.setState({userFullName: responseData["person"]["forename"]});
+          fetch(`https://api-wufthacks.xlabs.one:8243/td/account/V1.0.0/account/all?page=1&size=5`, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Bearer 8b60815e-85d1-3a21-9154-6c384535a6f2',
+              'Content-Type': 'application/json',
+              'X-Api-Key': this.state.apiKey
+            }
+          }).then((response) => {
+            return response.json();
+          }).then((responseData) => {
+            this.setState({accounts: responseData});
+          })
+        })
     })
-    .catch((error) => {
-      alert(error);
-      this.setState({isLoading: false});
-    });
   }
 
   render() {
