@@ -7,8 +7,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "babel-core": "^6.26.0",
     "react": "16.2.0",
-    "react-native": "0.52.2"
+    "react-native": "0.52.2",
+    "uuid": "^3.2.1",
+    "wordwrap": "^1.0.0"
   },
   "devDependencies": {
     "babel-jest": "22.1.0",

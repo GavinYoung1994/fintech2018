@@ -86,6 +86,11 @@ export default class Login extends React.Component {
     return (
       <View style={styles.container}>
           <View style={{alignItems: 'center'}}>
+          <View>
+            <Image
+            style={{width: 50, height: 50}} 
+            source={require('./tdbank.jpg')} />
+          </View>
             <View style={{flexDirection: 'row', marginBottom: 20}}>
               <Text style={{fontSize: 24, color: '#5dd55d'}}>TD Bank Payment System</Text>
             </View>
