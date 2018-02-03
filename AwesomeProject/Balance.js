@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { List, ListItem } from "react-native-elements";
 import {
   StyleSheet,
   Text,
   View,
   Image,
   TextInput,
-  Button
+  Button,
+  FlatList
 } from 'react-native';
 
 export default class Balance extends React.Component {
@@ -22,11 +24,44 @@ export default class Balance extends React.Component {
     }
   }
 
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#CED0CE"
+        }}
+      />
+    );
+  };
+
+  renderHeader = () => {
+    return <Text style={{fontSize: 24, color: '#5dd55d'}}>Pay From</Text>;
+  };
+
+
   render() {
     return (
       <View style={styles.container}>
-  	  	<View>
-          <Text style={{fontSize: 24, color: '#5dd55d'}}>Welcome, {this.props.username}</Text>
+        <View>
+            <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width:400 }}>
+              <FlatList
+                data={this.props.accounts}
+                renderItem={({ item }) => (
+                  <ListItem
+                    roundAvatar
+                    title={item['accountType']['accountType']}
+                    subtitle={'Balance: '+ item['balance']}
+                    containerStyle={{ borderBottomWidth: 0 }}
+                  />
+                )}
+                keyExtractor={item => item['accountNumber']}
+                ItemSeparatorComponent={this.renderSeparator}
+                ListHeaderComponent={this.renderHeader}
+                onEndReachedThreshold={50}
+              />
+            </List>
         </View>
       </View>
     );
