@@ -15,6 +15,7 @@ export default class Balance extends React.Component {
   static propTypes = {
     changeCurrentPage: PropTypes.func.isRequired,
     selectFromAccountId: PropTypes.func.isRequired,
+    selectFromAccountName: PropTypes.func.isRequired,
     username: PropTypes.string.isRequired,
     accounts: PropTypes.array.isRequired
   }
@@ -41,9 +42,10 @@ export default class Balance extends React.Component {
     return <Text style={{fontSize: 24, color: '#5dd55d', textAlign: 'center'}}>Pay From</Text>;
   };
 
-  selectFromAccountId = (id) => {
+  selectFromAccountId = (id, name) => {
     this.props.selectFromAccountId(id);
     this.props.changeCurrentPage('select');
+    this.props.selectFromAccountName(name)
   }
 
   render() {
@@ -59,7 +61,7 @@ export default class Balance extends React.Component {
                     title={item['accountType']['accountType']}
                     subtitle={'Balance: '+ item['balance']}
                     containerStyle={{ borderBottomWidth: 0 }}
-                    onPress={()=>{this.selectFromAccountId(item['accountId'])}}
+                    onPress={()=>{this.selectFromAccountId(item['accountId'], item['accountType']['accountType'])}}
                   />
                 )}
                 keyExtractor={item => item['accountId']}

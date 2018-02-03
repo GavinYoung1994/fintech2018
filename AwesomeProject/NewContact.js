@@ -32,24 +32,18 @@ export default class NewContact extends React.Component {
         <View style={styles.container}>
         <TouchableHighlight
          style={styles.button_1}
-         onPress={this.selectContactType}
+         onPress={() => {this.selectContactType('company')}}
         >
-         <Text style={styles.largeButton}> Public{' '} </Text>
+         <Text style={styles.largeButton}> Company </Text>
         </TouchableHighlight>
         <TouchableHighlight
          style={styles.button_2}
-         onPress={this.selectContactType}
+         onPress={() => {this.selectContactType('individual')}}
         >
-         <Text  style={styles.largeButton}> Private </Text>
+         <Text  style={styles.largeButton}> Individual </Text>
         </TouchableHighlight>
       
       </View>
-        // <View style={{width: 420, backgroundColor: '#33cc33', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        // <Text style={styles.largeButton}>Public</Text></View>
-        // <View style={{width: 420, backgroundColor: '#5dd55d', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        // <Text style={styles.largeButton}>Private</Text>
-        //</View>
-      //</View>
     );
   }
 }
@@ -66,20 +60,16 @@ const styles = StyleSheet.create({
   button_1: {
     alignItems: 'center',
     backgroundColor: '#33cc33',
-    marginBottom: 30,
-    borderRadius: 30,
-    padding: 100
+    padding: 148
   },
    button_2: {
     alignItems: 'center',
     backgroundColor: '#5dd55d',
-    borderRadius: 30,
-    marginBottom: 50,
-    padding: 100
+    padding: 148
   },
   largeButton: {
     color: '#fff',
-    fontSize: 48
+    fontSize: 26
   }
 
 

@@ -3,6 +3,9 @@ import Login from './Login';
 import Balance from './Balance'
 import Select from './Select';
 import NewContact from './NewContact';
+import IndContact from './IndContact';
+import Payment from './Payment';
+import CompContact from './Compcontact'
 import {
   StyleSheet,
   Text,
@@ -20,7 +23,10 @@ export default class App extends React.Component {
       currentPage: '',
       username: '',
       accounts: [],
-      fromAccountId: 0
+      fromAccountId: 0,
+      fromAccountName: '',
+      toAccountId: 0,
+      toAccountName: ''
     }
   }
 
@@ -44,6 +50,18 @@ export default class App extends React.Component {
     this.setState({fromAccountId: id});
   }
 
+  selectFromAccountName = (name) => {
+    this.setState({fromAccountName: name});
+  }
+
+  selectToAccountId = (id) => {
+    this.setState({toAccountId: id});
+  }
+
+  selectToAccountName = (name) => {
+    this.setState({toAccountName: name});
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -61,6 +79,7 @@ export default class App extends React.Component {
           <Balance
             changeCurrentPage = {this.changeCurrentPage}
             selectFromAccountId = {this.selectFromAccountId}
+            selectFromAccountName = {this.selectFromAccountName}
             username = {this.state.username}
             accounts = {this.state.accounts}
           />
@@ -69,12 +88,35 @@ export default class App extends React.Component {
           this.state.loggedIn && this.state.currentPage == 'select' &&
           <Select
             changeCurrentPage = {this.changeCurrentPage}
+            selectToAccountName = {this.selectToAccountName}
           />
         }
         {
           this.state.loggedIn && this.state.currentPage == 'newContact' &&
           <NewContact
             changeCurrentPage = {this.changeCurrentPage}
+          />
+        }
+        {
+          this.state.loggedIn && this.state.currentPage == 'individual' &&
+          <IndContact
+            changeCurrentPage = {this.changeCurrentPage}
+            selectToAccountId = {this.selectToAccountId}
+            selectToAccountName = {this.selectToAccountName}
+          />
+        }
+        {
+          this.state.loggedIn && this.state.currentPage == 'company' &&
+          <CompContact
+            changeCurrentPage = {this.changeCurrentPage}
+          />
+        }
+        {
+          this.state.loggedIn && this.state.currentPage == 'payment' &&
+          <Payment
+            changeCurrentPage = {this.changeCurrentPage}
+            fromAccountName = {this.state.fromAccountName}
+            toAccountName = {this.state.toAccountName}
           />
         }
       </View>

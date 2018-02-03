@@ -13,7 +13,8 @@ import {
 
 export default class Select extends React.Component {
   static propTypes = {
-    changeCurrentPage: PropTypes.func.isRequired
+    changeCurrentPage: PropTypes.func.isRequired,
+    selectToAccountName: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -75,7 +76,7 @@ export default class Select extends React.Component {
                     title={item['name']}
                     subtitle={item['note']}
                     containerStyle={{ borderBottomWidth: 0 }}
-                    onPress={()=>{}}
+                    onPress={()=>{this.props.selectToAccountName(item['name']); this.props.changeCurrentPage('payment')}}
                   />
                 )}
                 keyExtractor={item => item['name']}
@@ -102,7 +103,7 @@ export default class Select extends React.Component {
                     title={item['name']}
                     subtitle={item['note']}
                     containerStyle={{ borderBottomWidth: 0 }}
-                    onPress={()=>{}}
+                    onPress={()=>{this.props.selectToAccountName(item['name']); this.props.changeCurrentPage('payment')}}
                   />
                 )}
                 keyExtractor={item => item['name']}
