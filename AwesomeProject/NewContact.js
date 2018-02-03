@@ -8,6 +8,7 @@ import {
   Image,
   TextInput,
   Button,
+  TouchableHighlight,
   FlatList
 } from 'react-native';
 
@@ -28,13 +29,27 @@ export default class NewContact extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={{width: 380, backgroundColor: '#33cc33', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={styles.largeButton}>Public</Text></View>
-        <View style={{width: 380, backgroundColor: '#5dd55d', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={styles.largeButton}>Private</Text>
-        </View>
+        <View style={styles.container}>
+        <TouchableHighlight
+         style={styles.button_1}
+         onPress={this.selectContactType}
+        >
+         <Text style={styles.largeButton}> Public{' '} </Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+         style={styles.button_2}
+         onPress={this.selectContactType}
+        >
+         <Text  style={styles.largeButton}> Private </Text>
+        </TouchableHighlight>
+      
       </View>
+        // <View style={{width: 420, backgroundColor: '#33cc33', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        // <Text style={styles.largeButton}>Public</Text></View>
+        // <View style={{width: 420, backgroundColor: '#5dd55d', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        // <Text style={styles.largeButton}>Private</Text>
+        //</View>
+      //</View>
     );
   }
 }
@@ -45,10 +60,27 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    
+  },
+  button_1: {
+    alignItems: 'center',
+    backgroundColor: '#33cc33',
+    marginBottom: 30,
+    borderRadius: 30,
+    padding: 100
+  },
+   button_2: {
+    alignItems: 'center',
+    backgroundColor: '#5dd55d',
+    borderRadius: 30,
+    marginBottom: 50,
+    padding: 100
   },
   largeButton: {
-    fontSize: 48,
-    color: '#fff'
+    color: '#fff',
+    fontSize: 48
   }
+
+
 });
