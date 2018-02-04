@@ -94,7 +94,7 @@ export default class Login extends React.Component {
             }
             this.setState({isLoading: false});
             this.props.changeLoginStatus();
-            this.props.changeCurrentPage('balance');
+            this.props.changeCurrentPage('select');
           })
         })
     })

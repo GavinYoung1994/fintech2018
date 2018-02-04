@@ -19,7 +19,7 @@ export default class Payment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount: 0,
+      amount: '',
       note: ''
     }
   }

@@ -76,7 +76,7 @@ export default class Select extends React.Component {
                     title={item['name']}
                     subtitle={item['note']}
                     containerStyle={{ borderBottomWidth: 0 }}
-                    onPress={()=>{this.props.selectToAccountName(item['name']); this.props.changeCurrentPage('payment')}}
+                    onPress={()=>{this.props.selectToAccountName(item['name']); this.props.changeCurrentPage('balance')}}
                   />
                 )}
                 keyExtractor={item => item['name']}
@@ -103,7 +103,7 @@ export default class Select extends React.Component {
                     title={item['name']}
                     subtitle={item['note']}
                     containerStyle={{ borderBottomWidth: 0 }}
-                    onPress={()=>{this.props.selectToAccountName(item['name']); this.props.changeCurrentPage('payment')}}
+                    onPress={()=>{this.props.selectToAccountName(item['name']); this.props.changeCurrentPage('balance')}}
                   />
                 )}
                 keyExtractor={item => item['name']}

@@ -7,12 +7,14 @@ import {
   View,
   Image,
   TextInput,
-  Button
+  Button,
+  TouchableOpacity
 } from 'react-native';
 
 export default class IndContact extends React.Component {
   static propTypes = {
-    changeCurrentPage: PropTypes.func.isRequired
+    changeCurrentPage: PropTypes.func.isRequired,
+    selectToAccountName: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -28,7 +30,8 @@ export default class IndContact extends React.Component {
   }
 
   addContact = () => {
-  	this.props.changeCurrentPage('confirm');
+    this.props.selectToAccountName(this.state.companyname);
+  	this.props.changeCurrentPage('balance');
   }
 
   render() {
@@ -40,9 +43,44 @@ export default class IndContact extends React.Component {
               round
               onChangeText={()=>{}}
               placeholder='Type Here...' />
-              <Text style={{fontSize: 24, color: '#5dd55d',textAlign: 'center'}}>Add Company</Text>
+              <Text style={{fontSize: 24, color: '#5dd55d',textAlign: 'center'}}>Shortcuts</Text>
+            </View>
+            <View style={{flex: 1,flexDirection: 'row',justifyContent: 'space-between'}}>
+              <TouchableOpacity activeOpacity = { .5 } onPress={ () => {this.props.selectToAccountName('TD Bank');this.props.changeCurrentPage('balance');} }>
+              <Image
+              style={{width: 50, height: 50, marginRight: 15}} 
+              source={require('./tdbankicon.png')} />
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity = { .5 } onPress={ () => {this.props.selectToAccountName('ATT');this.props.changeCurrentPage('balance');} }>
+              <Image
+              style={{width: 50, height: 50, marginRight: 15}} 
+              source={require('./ATTicon.jpg')} />
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity = { .5 } onPress={ () => {this.props.selectToAccountName('Amazon');this.props.changeCurrentPage('balance');} }>
+              <Image
+              style={{width: 50, height: 50, marginRight: 15}} 
+              source={require('./amazonicon.png')} />
+              </TouchableOpacity>
+            </View>
+            <View style={{flex: 1,flexDirection: 'row',justifyContent: 'space-between', marginTop: 20, marginBottom: 20}}>
+              <TouchableOpacity activeOpacity = { .5 } onPress={ () => {this.props.selectToAccountName('Netflix');this.props.changeCurrentPage('balance');} }>
+              <Image
+              style={{width: 50, height: 50, marginRight: 15}} 
+              source={require('./Netflixicon.png')} />
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity = { .5 } onPress={ () => {this.props.selectToAccountName('Costco');this.props.changeCurrentPage('balance');} }>
+              <Image
+              style={{width: 50, height: 50, marginRight: 15}} 
+              source={require('./costcoicon.png')} />
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity = { .5 } onPress={ () => {this.props.selectToAccountName('Hulu');this.props.changeCurrentPage('balance');} }>
+              <Image
+              style={{width: 50, height: 50, marginRight: 15}} 
+              source={require('./Huluicon.png')} />
+              </TouchableOpacity>
             </View>
             <View>
+              <Text style={{fontSize: 24, color: '#5dd55d',textAlign: 'center'}}>Add Company</Text>
               <Text style={{textAlign: 'center'}}>
                 Company Name{'\n'}
               </Text>
@@ -57,7 +95,6 @@ export default class IndContact extends React.Component {
                 {'\n'}Account Number{'\n'}
               </Text>
               <TextInput
-                secureTextEntry = {true}
                 underlineColorAndroid = 'rgba(0,0,0,0)'
                 style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 180, marginBottom: 10, borderRadius: 10}}
                 onChangeText={(text) => this.setState({accountNum: text})}
@@ -69,7 +106,6 @@ export default class IndContact extends React.Component {
                 {'\n'}Note{'\n'}
               </Text>
               <TextInput
-                secureTextEntry = {true}
                 underlineColorAndroid = 'rgba(0,0,0,0)'
                 style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 180, marginBottom: 20, borderRadius: 10}}
                 onChangeText={(text) => this.setState({note: text})}

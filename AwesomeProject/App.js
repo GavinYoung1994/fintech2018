@@ -109,6 +109,7 @@ export default class App extends React.Component {
           this.state.loggedIn && this.state.currentPage == 'company' &&
           <CompContact
             changeCurrentPage = {this.changeCurrentPage}
+            selectToAccountName = {this.selectToAccountName}
           />
         }
         {

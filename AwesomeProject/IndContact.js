@@ -33,7 +33,7 @@ export default class IndContact extends React.Component {
 
   payment = () => {
   	this.props.selectToAccountName(this.state.firstname + ' ' + this.state.lastname);
-  	this.props.changeCurrentPage('payment');
+  	this.props.changeCurrentPage('balance');
   }
 
   render() {

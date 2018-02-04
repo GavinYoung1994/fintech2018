@@ -44,7 +44,7 @@ export default class Balance extends React.Component {
 
   selectFromAccountId = (id, name) => {
     this.props.selectFromAccountId(id);
-    this.props.changeCurrentPage('select');
+    this.props.changeCurrentPage('payment');
     this.props.selectFromAccountName(name)
   }
 
