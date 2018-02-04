@@ -8,7 +8,8 @@ import {
   Image,
   TextInput,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
+  Switch
 } from 'react-native';
 
 export default class IndContact extends React.Component {
@@ -21,8 +22,13 @@ export default class IndContact extends React.Component {
     super(props);
     this.state = {
     	companyname: '',
-    	accountNum: ''
+    	accountNum: '',
+      monthlyPayment: false
     }
+  }
+
+  toggleSwitch = () => {
+    this.setState({monthlyPayment: !this.state.monthlyPayment});
   }
 
   cancel = () => {
@@ -48,34 +54,34 @@ export default class IndContact extends React.Component {
             <View style={{flex: 1,flexDirection: 'row',justifyContent: 'space-between'}}>
               <TouchableOpacity activeOpacity = { .5 } onPress={ () => {this.props.selectToAccountName('TD Bank');this.props.changeCurrentPage('balance');} }>
               <Image
-              style={{width: 50, height: 50, marginRight: 15}} 
+              style={{width: 50, height: 50, marginRight: 15, borderRadius: 30}} 
               source={require('./tdbankicon.png')} />
               </TouchableOpacity>
               <TouchableOpacity activeOpacity = { .5 } onPress={ () => {this.props.selectToAccountName('ATT');this.props.changeCurrentPage('balance');} }>
               <Image
-              style={{width: 50, height: 50, marginRight: 15}} 
+              style={{width: 50, height: 50, marginRight: 15, borderRadius: 30}} 
               source={require('./ATTicon.jpg')} />
               </TouchableOpacity>
               <TouchableOpacity activeOpacity = { .5 } onPress={ () => {this.props.selectToAccountName('Amazon');this.props.changeCurrentPage('balance');} }>
               <Image
-              style={{width: 50, height: 50, marginRight: 15}} 
+              style={{width: 50, height: 50, marginRight: 15, borderRadius: 30}} 
               source={require('./amazonicon.png')} />
               </TouchableOpacity>
             </View>
             <View style={{flex: 1,flexDirection: 'row',justifyContent: 'space-between', marginTop: 20, marginBottom: 20}}>
               <TouchableOpacity activeOpacity = { .5 } onPress={ () => {this.props.selectToAccountName('Netflix');this.props.changeCurrentPage('balance');} }>
               <Image
-              style={{width: 50, height: 50, marginRight: 15}} 
+              style={{width: 50, height: 50, marginRight: 15, borderRadius: 30}} 
               source={require('./Netflixicon.png')} />
               </TouchableOpacity>
               <TouchableOpacity activeOpacity = { .5 } onPress={ () => {this.props.selectToAccountName('Costco');this.props.changeCurrentPage('balance');} }>
               <Image
-              style={{width: 50, height: 50, marginRight: 15}} 
+              style={{width: 50, height: 50, marginRight: 15, borderRadius: 30}} 
               source={require('./costcoicon.png')} />
               </TouchableOpacity>
               <TouchableOpacity activeOpacity = { .5 } onPress={ () => {this.props.selectToAccountName('Hulu');this.props.changeCurrentPage('balance');} }>
               <Image
-              style={{width: 50, height: 50, marginRight: 15}} 
+              style={{width: 50, height: 50, marginRight: 15, borderRadius: 30}} 
               source={require('./Huluicon.png')} />
               </TouchableOpacity>
             </View>
@@ -111,6 +117,16 @@ export default class IndContact extends React.Component {
                 onChangeText={(text) => this.setState({note: text})}
                 value={this.state.note}
               />
+              </View>
+              <View style={{flex: 1,flexDirection: 'row'}}>
+              <View>
+              <Text>Pay Monthly</Text>
+              </View>
+              <View>
+              <Switch
+              onValueChange = {this.toggleSwitch}
+              value = {this.state.monthlyPayment}/>
+              </View>
               </View>
               <View style={{marginBottom: 20}}><Button
 	            onPress={this.addContact}

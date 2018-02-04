@@ -6,7 +6,8 @@ import {
   View,
   Image,
   TextInput,
-  Button
+  Button,
+  Alert
 } from 'react-native';
 
 export default class Payment extends React.Component {
@@ -29,8 +30,15 @@ export default class Payment extends React.Component {
   }
 
   pay = () => {
-    alert("Payment made!");
-    this.props.changeCurrentPage('select');
+    Alert.alert(
+  'Payment Confirmation',
+  'Paying '+this.props.toAccountName+' '+this.state.amount+' from '+this.props.fromAccountName+'?',
+  [
+    {text: 'No', onPress: () => alert("Payment canceled"), style: 'cancel'},
+    {text: 'Yes', onPress: () => {alert("Payment made!"); this.cancel();}}
+  ],
+  { cancelable: false }
+);
   }
 
   render() {

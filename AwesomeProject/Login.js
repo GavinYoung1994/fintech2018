@@ -106,7 +106,7 @@ export default class Login extends React.Component {
           <View style={{alignItems: 'center'}}>
           <View>
             <Image
-            style={{width: 50, height: 50}} 
+            style={{width: 50, height: 50, borderRadius: 50, marginBottom: 20}} 
             source={require('./tdbank.jpg')} />
           </View>
             <View style={{flexDirection: 'row', marginBottom: 20}}>
